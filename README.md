@@ -2,7 +2,7 @@
 An LLM powered transliteration application that supports text, image, and PDF inputs, that transliterates and explains how and why transliteration decisions were made.
 
 ## Features
-- Context-aware transliteration
+- Context-aware transliterationq
 - Lingustic explanations
 - OCR (text input)
 - PDF text extraction
