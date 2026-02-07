@@ -1,3 +1,5 @@
+import pytest
+pytest.importorskip("fastapi")
 from fastapi import FastAPI
 
 app = FastAPI()

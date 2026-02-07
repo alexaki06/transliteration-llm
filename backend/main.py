@@ -1,10 +1,12 @@
 from fastapi import FastAPI
-from backend.api.routes import router
+from api.routes import router
+from api.chat import chat_router
 
 app = FastAPI(title="Transliteration LLM API")
 
-# Include router without prefix
+# Include routers without prefix
 app.include_router(router)
+app.include_router(chat_router)
 
 @app.get("/health")
 def health():

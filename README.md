@@ -72,8 +72,14 @@ This project is designed as a modular, production-style backend and serves as a 
 
 ```text
 backend/
-├─ api/                 # FastAPI routes
+├─ api/                 # FastAPI routes (includes WebSocket chat at /ws/chat)
 ├─ ocr/                 # OCR, preprocessing, language detection
 ├─ transliteration/     # LLM clients and transliteration logic
 ├─ main.py              # Application entry point
 └─ README.md
+
+
+## Chat WebSocket (MVP)
+
+A lightweight WebSocket chat is available at `/ws/chat`. It supports initializing sessions with optional context (e.g., a transliteration result) and streaming assistant replies in chunks. The transliteration endpoint returns `session_id` so you can follow up about a transliteration directly via chat.
+

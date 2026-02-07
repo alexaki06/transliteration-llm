@@ -3,7 +3,18 @@ from PIL import Image
 import pytesseract
 import pdfplumber
 
+
+def check_tesseract_installed() -> bool:
+    """Raise a clear error if pytesseract / tesseract is not available."""
+    try:
+        import pytesseract  # type: ignore
+    except Exception as e:
+        raise RuntimeError("pytesseract is not available. Install Tesseract and the pytesseract package") from e
+    return True
+
+
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+
 def ocr_from_image(image_path: str, lang: Optional[str] = None) -> str:
     """
     Extract text from an image using pytesseract.

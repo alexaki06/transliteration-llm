@@ -6,8 +6,6 @@ from typing import Optional
 from abc import ABC, abstractmethod
 import subprocess
 
-from backend.ocr.ocr_utils import ocr_from_image, ocr_from_pdf
-
 
 class LLMClient(ABC):
     @abstractmethod
@@ -26,6 +24,8 @@ class OllamaClient(LLMClient):
                 input=prompt,
                 capture_output=True,
                 text=True,
+                encoding='utf-8',
+                errors='replace'
             )
         except FileNotFoundError:
             raise RuntimeError(
@@ -112,6 +112,9 @@ class TransliterationApp:
         context: Optional[str] = None,
         langs: Optional[str] = None,  # supports multiple languages like "eng+rus"
     ):
+        # Import OCR helpers lazily to avoid hard dependency at module import time
+        from ocr.ocr_utils import ocr_from_image
+
         text = ocr_from_image(image_path, lang=langs)
 
         if not text.strip():
@@ -128,6 +131,9 @@ class TransliterationApp:
         context: Optional[str] = None,
         langs: Optional[str] = None,  # supports multiple languages like "eng+rus"
     ):
+        # Import OCR helpers lazily to avoid hard dependency at module import time
+        from ocr.ocr_utils import ocr_from_pdf
+
         text = ocr_from_pdf(pdf_path, lang=langs)
 
         if not text.strip():
